@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="images/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="store-icon">
+        <img src="images/store.png" alt="">
+    </div>
+
+    <section class="store-container hidden">
+        <div class="store">
+            <img class="close-icon" src="https://cdn.pixabay.com/photo/2012/04/12/20/12/x-30465_640.png" alt="">
+            <h2 class="points"></span></h2>
+            <div class="items-container">
+
+            </div>
+        </div>
+
+        <p class="msg"></p>
+    </section>
+
+    <div class="score-place">
+        <p class="score">SCORE: <span id="score">0</span></p>
+        <p class="Hscore"><strong>HIGH SCORE:</strong> <span id="Hscore">0</span></p>
+    </div>
+    <section class="game">
+        <h1>Super Game</h1>
+        <div class="bord" id="bord"></div>
+    </section>
+    
+    <section class="mobile-controlers mob">
+        <img src="images/arrow.png" alt="" id="up" data-command="up">
+        <img src="images/arrow.png" alt="" id="down"" data-command="down">
+        <div class="middle">
+            <img src="images/arrow.png" alt="" id="left" data-command="left">
+            <img src="images/arrow.png" alt="" id="right" data-command="right">
+        </div>
+    </section>
+
+    <script src="index.js"></script>
+</body>
+</html>
