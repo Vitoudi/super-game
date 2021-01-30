@@ -11,13 +11,18 @@ body {
     'game game'
     ;
     min-height: 100vh;
-    background-color: blue;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Press Start 2P', cursive;
 }
 
-.store-icon {
+.icons {
     grid-area: store;
-    margin: 20px;
+    justify-self: start;
+    align-self: start;
+    display: flex;
+}
+
+.icon {
+    margin: 20px 0;
     padding: 8px;
     border-radius: 5px;
     justify-self: start;
@@ -26,12 +31,27 @@ body {
     cursor: pointer;
 }
 
+.store-icon {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+}
+
+.icon img {
+    width: 30px;
+}
+
 .store-icon:hover {
     background-color: rgb(211, 211, 211);
 }
 
 .store-icon img {
     width: 30px;
+}
+
+.theme-icon {
+    margin: 20px;
 }
 
 .game {
@@ -45,8 +65,10 @@ body {
 h1 {
     text-align: center;
     color: rgb(255, 225, 125);
-    font-size: 50px;
+    font-size: 40px;
     text-transform: uppercase;
+    text-align: center;
+    margin-top: 10px;
     margin-bottom: 30px;
     text-shadow: 2px 2px 2px black;
 }
@@ -55,7 +77,6 @@ h1 {
     height: 390px;
     width: 390px;
     border: 5px solid black;
-    background-color: rgb(101, 209, 236);
     z-index: -1;
 }
 
@@ -103,7 +124,8 @@ h1 {
 
 .game-over-back-ground h2 {
     color: red;
-    font-size: 90px;
+    font-size: 70px;
+    margin-bottom: 20px;
     text-shadow: 2px 2px 3px black;
 }
 
@@ -123,7 +145,7 @@ h1 {
 
 .score {
     color: white;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .Hscore {
@@ -132,6 +154,7 @@ h1 {
 }
 
 .try-again {
+    font-family: inherit;
     justify-self: center;
     margin: 30px;
     background-color: blue;
@@ -151,6 +174,87 @@ h1 {
 .mobile-controlers {
     display: none;
 }
+
+
+
+
+
+/*THEMES*/
+.menu-icon {
+    margin: 10px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.main-theme-content {
+    padding: 20px;
+}
+
+.themes {
+    position: absolute;
+    background-color: rgb(218, 218, 218);
+    color: white;
+    height: 100%;
+    width: 250px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px black;
+    box-shadow: 3px 2px 7px 5px rgba(0, 0, 0, 0.63);
+    z-index: 10;
+    margin-left: -500px;
+}
+
+.themes h2 {
+    color: red;
+    font-size: 25px;
+}
+
+.theme {
+    margin: 15px 10px;
+    font-size: 20px;
+    color: rgb(110, 110, 110);
+    cursor: pointer;
+}
+
+.theme:hover {
+    color: rgb(0, 0, 129);
+}
+
+.active {
+    color: blue;
+}
+
+
+[data-theme="blue-prime"] {
+    transition: .5s;
+    background-color: blue;
+}
+[data-theme="blue-second"] {
+    transition: .5s;
+    background-color: rgb(101, 209, 236);
+}
+
+
+
+[data-theme="dark-prime"] {
+    transition: .5s;
+    background-color: rgb(29, 29, 29);
+}
+[data-theme="dark-second"] {
+    transition: .5s;
+    background-color: rgb(68, 68, 68);
+}
+
+
+
+[data-theme="white-prime"] {
+    transition: .5s;
+    background-color: rgb(185, 185, 185);
+}
+[data-theme="white-second"] {
+    transition: .5s;
+    background-color: rgb(255, 255, 255);
+}
+
 
 
 
@@ -200,6 +304,7 @@ h1 {
    background-color: yellow;
    border: 5px solid rgb(138, 138, 27);
    border-radius: 10px;
+   font-size: 12px;
    display: grid;
    justify-content: center;
    justify-items: center;
@@ -230,6 +335,7 @@ h1 {
     text-transform: uppercase;
     color: rgb(28, 124, 76);
     margin: 10px 20px;
+    font-size: 14px;
 }
 
 .selected {
@@ -241,7 +347,7 @@ h1 {
     color: red;
     font-weight: bold;
     text-shadow: 2px 2px 3px black;
-    font-size: 30px;
+    font-size: 25px;
     padding: 10px;
     margin: 10px;
     background-color: rgba(0, 0, 0, 0.52);
@@ -255,10 +361,46 @@ h1 {
 
 
 
+/*annimations*/
+.slide {
+    animation-name: slide;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+}
+@keyframes slide {
+    to {
+        margin-left: 0;
+    }
+}
+
+
+.slide-back {
+    animation-name: slideBack;
+    animation-duration: .5s;
+    animation-fill-mode: backwards;
+}
+@keyframes slideBack {
+    from {
+        margin-left: 0px;
+    }
+    to {
+        margin-left: -500px;
+    }
+}
+
+
+
+
+
+
+
 
 .hidden {
     display: none;
 }
+
+
+
 
 @media only screen and (max-width: 750px) {
     body {
@@ -271,11 +413,10 @@ h1 {
         ;
         min-height: 100vh;
         background-color: blue;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
     h1 {
-        font-size: 40px;
+        font-size: 30px;
     }
     .bord {
         height: 300px;
@@ -283,7 +424,7 @@ h1 {
     }
     
     .game-over-back-ground h2 {
-        font-size: 50px;
+        font-size: 35px;
     }
     
     .score-place {
@@ -295,12 +436,12 @@ h1 {
 
     .score {
         color: white;
-        font-size: 25px;
+        font-size: 20px;
     }
     
     .Hscore {
         color: white;
-        font-size: 15px;
+        font-size: 12px;
     }
 
 
@@ -337,6 +478,10 @@ h1 {
 
     #left {
         transform: rotate(270deg);
+    }
+
+    .icon img {
+        width: 25px;
     }
 
     .middle {
@@ -408,6 +553,6 @@ h1 {
     }
 
     .msg {
-        font-size: 20px;
+        font-size: 10px;
     }
 }

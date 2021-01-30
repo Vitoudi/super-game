@@ -182,6 +182,7 @@ class Bomb extends Food {
 class Store {
     constructor() {
         this.HTMLlocation = document.querySelector('.store')
+        this.loadingImg = 'images/loading.gif'
         this.containerLocation = document.querySelector('.store-container')
         this.ready = false
     }
@@ -201,6 +202,18 @@ class Store {
                 this.displayItems(data)
                 this.displayPoints()
             })
+    }
+
+    printLoading() {
+        this.HTMLlocation.innerHTML += `
+            <img id="loading-icon" src="${this.loadingImg}">
+        
+        `
+    }
+
+    removeLoanding() {
+        const loading = document.querySelector('#loading-icon')
+        loading.remove()
     }
 
     displayPoints() {
@@ -322,6 +335,61 @@ class Store {
 
 }
 
+class ThemeMenager {
+    constructor() {
+        this.HTMLlocation = document.querySelector('.themes')
+    }
+
+    openSidebar() {
+        this.HTMLlocation.classList.add('slide')
+        this.HTMLlocation.classList.remove('slide-back')
+    }
+
+    closeSidebar() {
+        this.HTMLlocation.classList.add('slide-back')
+        this.HTMLlocation.classList.remove('slide')
+    }
+
+    changeTheme(theme) {
+        localStorage.setItem('theme', theme)
+        this.setCurrentTheme()
+    }
+
+    setCurrentTheme() {
+        const body = document.body
+        const bord = document.querySelector('.bord')
+
+        try {
+            const theme = this.theme
+            this.checkBtn(theme)
+
+            body.setAttribute('data-theme', `${theme}-prime`)
+            bord.setAttribute('data-theme', `${theme}-second`)
+        } 
+        catch {
+            body.setAttribute('data-theme', `blue-prime`)
+            bord.setAttribute('data-theme', `blue-second`)
+            console.warn('selected theme dosen\' exists, default theme was selected')
+        }
+        
+    }
+
+    checkBtn(btnName) {
+        const btns = document.querySelectorAll('.theme')
+        const btn = document.querySelector(`#${btnName}`)
+
+        btns.forEach(btn => {
+            btn.classList.remove('active')
+        })
+
+        btn.classList.add('active')
+    }
+
+    get theme() {
+        return localStorage.getItem('theme')
+    }
+}
+
 class Game extends Observer {
     constructor() {
         super()
@@ -329,6 +397,7 @@ class Game extends Observer {
         this.player; 
         this.controler;
         this.store;
+        this.themeMenager
     }
 
     start() {
@@ -343,6 +412,10 @@ class Game extends Observer {
         const store = new Store()
         store.setSelectedSkin()
         this.store = store
+
+        const themeMenager = new ThemeMenager()
+        themeMenager.setCurrentTheme()
+        this.themeMenager = themeMenager
 
         this.startFoodGeneration()
         this.startBombGeneration()
@@ -437,6 +510,7 @@ function init() {
     const game = new Game()
 
     function setLocalStorageDefaultValues() {
+        if(!localStorage.getItem('theme')) localStorage.setItem('theme', 'blue')
         if(localStorage.getItem('skin'), localStorage.getItem('allPoints'), localStorage.getItem('buyed')) return
         localStorage.setItem('skin', 'defaulto')
         localStorage.setItem('allPoints', 0)
@@ -457,11 +531,21 @@ function init() {
 
         document.querySelector('.store-icon').addEventListener('click', e => game.store.toggle())
         document.querySelector('.close-icon').addEventListener('click', e => game.store.toggle())
+
+        document.querySelector('.theme-icon').addEventListener('click', ()=> game.themeMenager.openSidebar())
+        document.querySelector('.menu-icon').addEventListener('click', ()=> game.themeMenager.closeSidebar())
+        document.querySelector('.themes').addEventListener('click', e => {
+            if(e.target.classList.contains('theme')) {
+                const theme = e.target.id
+                game.themeMenager.changeTheme(theme)
+            }
+        })
     }
-    
+
     setLocalStorageDefaultValues()
     startGame()
     setAllEvents()
+
 }
 init()
 
